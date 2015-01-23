@@ -1,0 +1,10 @@
+CREATE INDEX id1_2 on five_grams (id1,id2);
+CREATE INDEX id1_3 on five_grams (id1,id3);
+CREATE INDEX id1_4 on five_grams (id1,id4);
+CREATE INDEX id1_5 on five_grams (id1,id5);
+CREATE INDEX id2_3 on five_grams (id2,id3);
+CREATE INDEX id2_4 on five_grams (id2,id4);
+CREATE INDEX id2_5 on five_grams (id2,id5);
+CREATE INDEX id3_1 on five_grams (id3,id4);
+CREATE INDEX id3_2 on five_grams (id3,id5);
+CREATE INDEX id4_5 on five_grams (id4,id5);

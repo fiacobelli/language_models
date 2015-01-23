@@ -1,0 +1,11 @@
+import sqlite3
+
+if __name__=="__main__":
+    conn = sqlite3.connect('5gms_db.db')
+    c = conn.cursor()
+    q = input("Query:")
+    while (len(q)>3):
+        for row in c.execute(q):
+            print row
+        q = input("Query")
+

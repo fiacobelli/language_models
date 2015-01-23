@@ -1,0 +1,28 @@
+1-GRAM	fox	1
+1-GRAM	nay	3
+1-GRAM	the	1
+1-GRAM	what	1
+1-GRAM	does	1
+1-GRAM	@SEP@	3
+1-GRAM	?!	1
+1-GRAM	say	1
+2-GRAM	nay @SEP@	1
+2-GRAM	what does	1
+2-GRAM	fox say	1
+2-GRAM	@SEP@ what	1
+2-GRAM	?! @SEP@	1
+2-GRAM	@SEP@ nay	1
+2-GRAM	the fox	1
+2-GRAM	nay nay	2
+2-GRAM	say ?!	1
+2-GRAM	does the	1
+3-GRAM	does the fox	1
+3-GRAM	@SEP@ what does	1
+3-GRAM	the fox say	1
+3-GRAM	nay nay @SEP@	1
+3-GRAM	?! @SEP@ nay	1
+3-GRAM	nay nay nay	1
+3-GRAM	fox say ?!	1
+3-GRAM	say ?! @SEP@	1
+3-GRAM	what does the	1
+3-GRAM	@SEP@ nay nay	1
