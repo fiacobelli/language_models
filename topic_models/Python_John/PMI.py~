@@ -43,25 +43,37 @@ def wordCounter(l_words):
 #nested for loop goes through a string to retrieve all possible word pair combinations
 def bigramCombination(listString):
     newList = []
-    i=1
+    
     for e1 in listString[:-1]:
-        for e2 in listString[i:]:
+        for e2 in listString:
             newItem = [e1, e2]
             newList.append(newItem)
-        i+=1
+            
     return newList
     
 #window shifter, gets first window, moves position by one, appends all combinations to the last element
 #unfinished
 def windowShift(listString, initialN):
-    newList = bigramCombination(listString[:initialN])
-    #first window
-    for i in range(1,len(listString)-initialN+1):
-        for e1 in listString[i:i+initialN-1]:
-            print e1,i,i+initialN-1,initialN+1
-            newItem1 = [e1, listString[initialN+i-1]]
+   newList = []
+   
+   #first window
+   for e1 in listString[:initialN - 1]:
+      for e2 in listString[:initialN]:
+         if(e1 != e2): 
+            newItem1 = [e1, e2]
+            newItem2 = [e2, e1]
             newList.append(newItem1)
-    return newList
+            newList.append(newItem2)
+            
+   #remaining append end word to prior window         
+   for e1 in listString[initialN:]:
+      for e2 in listString:
+         if(e1 != e2):
+            newItem1 = [e1, e2]
+            newItem2 = [e2, e1]
+            newList.append(newItem1)
+            newList.append(newItem2)     
+   return newList
 
 #start of algorithm
 listString = "The cat in the cat" 
