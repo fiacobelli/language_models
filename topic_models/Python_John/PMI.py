@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
 """
 John Hewitt
-#2/15/15
-#Writing a PMI to pass through text files
+2/15/15
+Writing a PMI to pass through text files
     -open file --done
     -need to get w1, w2 --done
-    -import stopwords filter. remove all occurences of words that are in this set before we work more intensively with the calculations
+    -import stop-words filter. remove all occurrences of words that are in this set before we work more intensively with the calculations
     -find 
         --gram[] ; list of sample words, by window n -done
         --tot ; all words in sample space --word count, done
-    -look for index of words and count occurences (Collection.counter(set)) -done
-    -apply pmi -done
-        --rinse, repeat pmi for all sets of words in text
+    -look for index of words and count occurrences (Collection.counter(set)) -done
+    -apply PMI -done
+        --rinse, repeat PMI for all sets of words in text
     -print results
     -find a good threshold to return meaningful word pairs
     -apply threshold to filter out poor results
     -always close resources
-    """
+"""
 
 import math
 from collections import Counter 
 
-#functions used by PMI application
+#functions used by PMI application from line 24 - 64
 #Dr Francisco Iacobelli provided the PMI and N-grams functions
 def pmi(w1, w2, grams, tot):
     return math.log((grams[w1 + " " + w2] * 1.0) / (grams[w1] * grams[w2]) * tot)
@@ -43,11 +43,11 @@ def wordCounter(l_words):
 #nested for loop goes through a string to retrieve all possible word pair combinations
 def bigramCombination(listString):
     newList = []
-    i=1
+    i = 1
     for e1 in listString[:-1]:
         for e2 in listString[i:]:
-            newItem = [e1, e2]
-            newList.append(newItem)
+            newItem = e1 + " " + e2
+            newList.append(newItem.lower())
         i+=1
     return newList
     
@@ -58,18 +58,42 @@ def windowShift(listString, initialN):
     #first window
     for i in range(1,len(listString)-initialN+1):
         for e1 in listString[i:i+initialN-1]:
-            print e1,i,i+initialN-1,initialN+1
-            newItem1 = [e1, listString[initialN+i-1]]
-            newList.append(newItem1)
+            #print e1,i,i+initialN-1,initialN+1
+            newItem1 = e1 + " " + listString[initialN+i-1]
+            newList.append(newItem1.lower())
     return newList
+    
+def printHeader():
+   return "Word\tCount\n"
 
-#start of algorithm
-listString = "The cat in the cat" 
+def wordListPrinter(testList, testFile):
+	for key in testList:
+		testFile.write("%s\t%s\n" % (key, testList[key]))
+      
+
+
+#start of program
+listString = "The general fell off the horse " 
 listString = listString.split(" ")
 
 listWindow = windowShift(listString, 4)
+countedWords = wordCounter(listWindow)
+#print countedWords
+#print listWindow
 
-print listWindow
+testFile = open("test.txt", "w")
+testFile.write(printHeader())
+wordListPrinter(countedWords, testFile)
+testFile = "test.txt"
+print open(testFile).read()
+
+
+#!!tab spacing is not consistent with string length!!
+#so the tab may be there in the code / formatting but it will not appear so
+#sample print for writing to file
+#for key in countedWords:
+#print key, "\t", countedWords[key]
+
 
 """
 excess test code
@@ -97,7 +121,3 @@ wordListAndGrams = wordListCounted + wordListGramsCounted
 #print wordWindows
 #wordWindows = windowShift(wordList1, 4)
 """
-
-
-
-
