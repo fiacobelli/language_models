@@ -19,7 +19,8 @@ Writing a PMI to pass through text files
 """
 
 import math
-from collections import Counter 
+from collections import Counter
+from sys import argv
 
 #functions used by PMI application from line 24 - 64
 #Dr Francisco Iacobelli provided the PMI and N-grams functions
@@ -52,7 +53,6 @@ def bigramCombination(listString):
     return newList
     
 #window shifter, gets first window, moves position by one, appends all combinations to the last element
-#unfinished
 def windowShift(listString, initialN):
     newList = bigramCombination(listString[:initialN])
     #first window
@@ -66,15 +66,16 @@ def windowShift(listString, initialN):
 def printHeader():
    return "Word\tCount\n"
 
+#!!tab spacing is not consistent with string length!!
+#so the tab may be there in the code / formatting but it will not appear so
 def wordListPrinter(testList, testFile):
 	for key in testList:
 		testFile.write("%s\t%s\n" % (key, testList[key]))
-      
 
 
 #start of program
-listString = "The general fell off the horse " 
-listString = listString.split(" ")
+script, folder = argv
+listString = file2list("shiloh.txt")
 
 listWindow = windowShift(listString, 4)
 countedWords = wordCounter(listWindow)
@@ -86,14 +87,6 @@ testFile.write(printHeader())
 wordListPrinter(countedWords, testFile)
 testFile = "test.txt"
 print open(testFile).read()
-
-
-#!!tab spacing is not consistent with string length!!
-#so the tab may be there in the code / formatting but it will not appear so
-#sample print for writing to file
-#for key in countedWords:
-#print key, "\t", countedWords[key]
-
 
 """
 excess test code
