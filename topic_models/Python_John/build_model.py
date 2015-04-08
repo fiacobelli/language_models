@@ -101,7 +101,7 @@ def write_counter(outfilename,counter):
 
 if __name__=='__main__':
     script, filename, outfilename = argv
-    counts = process_file(filename,4)
+    counts = process_file(filename,5)
     write_counter(outfilename,counts)
 
 """
