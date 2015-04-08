@@ -102,7 +102,7 @@ def locate(pattern, root_path):
 
 def process_folder(folder,window_size,extension="txt"):
     # Recursively find all *.txt files in **/usr/bin**
-    found_files = [f for f in locate("*."+extension,folder)]
+    found_files = [f for f in locate("*"+extension,folder)]
     total_counter = process_file(found_files[0],window_size)
     tot_files = len(found_files)
     print "Found",tot_files,"Files"
@@ -122,6 +122,6 @@ def write_counter(outfilename,counter):
 
 if __name__=='__main__':
     script, folder, outfilename = argv
-    counts = process_folder(folder,5)
+    counts = process_folder(folder,5,"")
     write_counter(outfilename,counts)
 
