@@ -21,12 +21,20 @@ Writing a PMI to pass through text files
 import math
 from collections import Counter
 from sys import argv
+import re
+import build_model as bm
+import numpy
 
+punct = re.compile(r'[!?,:;/()]')
 #functions used by PMI application from line 24 - 64
 #Dr Francisco Iacobelli provided the PMI and N-grams functions
 def pmi(w1, w2, grams, tot):
-    return math.log((grams[w1 + " " + w2] * 1.0) / (grams[w1] * grams[w2]) * tot)
-    
+    key = w1 + " " + w2
+    if key in grams:
+        return math.log((grams[w1 + " " + w2] * 1.0) / (grams[w1] * grams[w2]) * tot)
+    return 0
+
+
 def ngrams(input, n):
     input = input.split(" ")
     output = []
@@ -34,83 +42,32 @@ def ngrams(input, n):
         output.append(" ".join(input [i:i+n]))
     return output
 
-#open and split file
-def file2list(filename):
-   return open(filename).read().split(" ")
-   
-def wordCounter(l_words):
-   return Counter(l_words)
-   
-#nested for loop goes through a string to retrieve all possible word pair combinations
-def bigramCombination(listString):
-    newList = []
-    i = 1
-    for e1 in listString[:-1]:
-        for e2 in listString[i:]:
-            newItem = e1 + " " + e2
-            newList.append(newItem.lower())
-        i+=1
-    return newList
-    
-#window shifter, gets first window, moves position by one, appends all combinations to the last element
-def windowShift(listString, initialN):
-    newList = bigramCombination(listString[:initialN])
-    #first window
-    for i in range(1,len(listString)-initialN+1):
-        for e1 in listString[i:i+initialN-1]:
-            #print e1,i,i+initialN-1,initialN+1
-            newItem1 = e1 + " " + listString[initialN+i-1]
-            newList.append(newItem1.lower())
-    return newList
-    
-def printHeader():
-   return "Word\tCount\n"
+def read_model(filename):
+    '''
+        read the filename model and return a dictionary
+    '''
+    f = open(filename)
+    counts = {}
+    for line in f:
+        key,val = line.split("\t")
+        counts[key]=int(val)
+    return counts
 
-#!!tab spacing is not consistent with string length!!
-#so the tab may be there in the code / formatting but it will not appear so
-def wordListPrinter(testList, testFile):
-	for key in testList:
-		testFile.write("%s\t%s\n" % (key, testList[key]))
+# According to Newman et al., PMI-score(sentence)=median{PMI(w_i,w_j), i,j in {1..window size}
+def sentence_pmi(sentence,counts):
+        tot = counts["@#total#@"]
+        words = bm.normalize_words(sentence.split(" "))
+        tot_pmi = []
+        combos = bm.bigramCombination(words)
+        for b in combos:
+            w1,w2=b.split()
+            tot_pmi.append(pmi(w1,w2,counts,tot))
+        print tot_pmi
+        return numpy.median(numpy.array(tot_pmi))
 
 
-#start of program
-script, folder = argv
-listString = file2list("shiloh.txt")
+if __name__=='__main__':
+    script, filename, sentence = argv
+    m = read_model(filename)
+    print(sentence_pmi(sentence,m))
 
-listWindow = windowShift(listString, 4)
-countedWords = wordCounter(listWindow)
-#print countedWords
-#print listWindow
-
-testFile = open("test.txt", "w")
-testFile.write(printHeader())
-wordListPrinter(countedWords, testFile)
-testFile = "test.txt"
-print open(testFile).read()
-
-"""
-excess test code
-#return counted list
-wordListCounted = wordCounter(wordList1)
-
-#get bigrams
-wordListGrams = ngrams(open(fileName).read(), 2)
-
-#bigram pair counts for PMI
-wordListGramsCounted = wordCounter(wordListGrams)
-
-#gram collections for pmi
-wordListAndGrams = wordListCounted + wordListGramsCounted
-
-#bigramList = bigramCombination(wordList1)
-
-#print (bigramList)
-#print pmi("of", "Shiloh,", wordListAndGrams, 278)
-#print wordListAndGrams
-#open test file, and split it into words
-#fileName = "shiloh.txt"
-#fileFolder = [] #will implement later for multiple document analysis
-#wordList1 = file2list(fileName)
-#print wordWindows
-#wordWindows = windowShift(wordList1, 4)
-"""
