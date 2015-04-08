@@ -22,8 +22,9 @@ import math
 from collections import Counter
 from sys import argv
 import re
+import os, fnmatch
 
-punct = re.compile(r'[!?,:;/()]')
+punct = re.compile(r'\W')
 #functions used by PMI application from line 24 - 64
 #Dr Francisco Iacobelli provided the PMI and N-grams functions
 def pmi(w1, w2, grams, tot):
@@ -93,6 +94,26 @@ def process_file(filename,window_size):
     return counted_unigrams
 
 
+def locate(pattern, root_path):
+    for path, dirs, files in os.walk(os.path.abspath(root_path)):
+        for filename in fnmatch.filter(files, pattern):
+            yield os.path.join(path, filename)
+
+
+def process_folder(folder,window_size,extension="txt"):
+    # Recursively find all *.txt files in **/usr/bin**
+    found_files = [f for f in locate("*."+extension,folder)]
+    total_counter = process_file(found_files[0],window_size)
+    tot_files = len(found_files)
+    print "Found",tot_files,"Files"
+    for i,f in enumerate(found_files[1:]):
+        total_counter.update(process_file(f,window_size))
+        if tot_files%(i+1) == 0:
+            print i,"/",tot_files,"Files"
+    print "Done",tot_files,"Files",total_counter["@#total#@"],"Words",len(total_counter.keys())-total_counter["@#total#@"]-1,"pairs"
+    return total_counter
+
+
 def write_counter(outfilename,counter):
     testFile = open(outfilename, "w")
     #testFile.write(printHeader())
@@ -100,33 +121,7 @@ def write_counter(outfilename,counter):
     
 
 if __name__=='__main__':
-    script, filename, outfilename = argv
-    counts = process_file(filename,5)
+    script, folder, outfilename = argv
+    counts = process_folder(folder,5)
     write_counter(outfilename,counts)
 
-"""
-excess test code
-#return counted list
-wordListCounted = wordCounter(wordList1)
-
-#get bigrams
-wordListGrams = ngrams(open(fileName).read(), 2)
-
-#bigram pair counts for PMI
-wordListGramsCounted = wordCounter(wordListGrams)
-
-#gram collections for pmi
-wordListAndGrams = wordListCounted + wordListGramsCounted
-
-#bigramList = bigramCombination(wordList1)
-
-#print (bigramList)
-#print pmi("of", "Shiloh,", wordListAndGrams, 278)
-#print wordListAndGrams
-#open test file, and split it into words
-#fileName = "shiloh.txt"
-#fileFolder = [] #will implement later for multiple document analysis
-#wordList1 = file2list(fileName)
-#print wordWindows
-#wordWindows = windowShift(wordList1, 4)
-"""

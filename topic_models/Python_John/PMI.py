@@ -25,7 +25,7 @@ import re
 import build_model as bm
 import numpy
 
-punct = re.compile(r'[!?,:;/()]')
+punct = re.compile(r'\W')
 #functions used by PMI application from line 24 - 64
 #Dr Francisco Iacobelli provided the PMI and N-grams functions
 def pmi(w1, w2, grams, tot):
