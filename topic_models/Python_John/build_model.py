@@ -24,6 +24,7 @@ from sys import argv
 import re
 import cPickle
 import os, fnmatch,datetime
+from pprint import pprint
 
 punct = re.compile(r'\W')
 #functions used by PMI application from line 24 - 64
@@ -101,8 +102,9 @@ def locate(pattern, root_path):
             yield os.path.join(path, filename)
 
 
-def process_folder(folder,window_size,extension="txt"):
-    # Recursively find all *.txt files in **/usr/bin**
+def process_folder(folder,window_size,extension="txt",tempfname,f2d):
+    # Recursively find all *.txt files in **/usr/bin**.
+    # f2d indicates how many files per dictionary (to process large collections)
     found_files = [f for f in locate("*"+extension,folder)]
     total_counter = process_file(found_files[0],window_size)
     tot_files = len(found_files)
@@ -110,7 +112,11 @@ def process_folder(folder,window_size,extension="txt"):
     for i,f in enumerate(found_files[1:]):
         total_counter.update(process_file(f,window_size))
         if i%100 == 0:
-            print datetime.datetime.now(),i,"/",tot_files,"Files"
+            pprint(datetime.datetime.now()+":"+str(i)+"/"+str(tot_files)+" Files")
+        if i%f2d==0 and i>0:
+            pprint("Writing files "+str(i-f2d)+" to "+str(i))
+            write_counter_b(tempfname+"_"+str(i)+".dat")
+            total_counter = collections.Counter()
     print "Done",tot_files,"Files",total_counter["@#total#@"],"Words",len(total_counter.keys())-total_counter["@#total#@"]-1,"pairs"
     return total_counter
 
@@ -127,6 +133,6 @@ def write_counter_b(outfilename,counter):
 
 if __name__=='__main__':
     script, folder, outfilename = argv
-    counts = process_folder(folder,5,".txt")
+    counts = process_folder(folder,5,".txt",outfilename)
     write_counter_b(outfilename,counts)
 
