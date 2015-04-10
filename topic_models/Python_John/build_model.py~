@@ -22,8 +22,7 @@ import math
 from collections import Counter
 from sys import argv
 import re
-import cPickle
-import os, fnmatch,datetime
+import os, fnmatch
 
 punct = re.compile(r'\W')
 #functions used by PMI application from line 24 - 64
@@ -109,8 +108,8 @@ def process_folder(folder,window_size,extension="txt"):
     print "Found",tot_files,"Files"
     for i,f in enumerate(found_files[1:]):
         total_counter.update(process_file(f,window_size))
-        if i%100 == 0:
-            print datetime.datetime.now(),i,"/",tot_files,"Files"
+        if tot_files%(i+1) == 0:
+            print i,"/",tot_files,"Files"
     print "Done",tot_files,"Files",total_counter["@#total#@"],"Words",len(total_counter.keys())-total_counter["@#total#@"]-1,"pairs"
     return total_counter
 
@@ -119,14 +118,10 @@ def write_counter(outfilename,counter):
     testFile = open(outfilename, "w")
     #testFile.write(printHeader())
     wordListPrinter(counter, testFile)
-
-def write_counter_b(outfilename,counter):
-    of = open(outfilename,"w")
-    cPickle.dump(counter,of,cPickle.HIGHEST_PROTOCOL)
-    of.close()
+    
 
 if __name__=='__main__':
     script, folder, outfilename = argv
-    counts = process_folder(folder,5,".txt")
-    write_counter_b(outfilename,counts)
+    counts = process_folder(folder,5,"")
+    write_counter(outfilename,counts)
 
