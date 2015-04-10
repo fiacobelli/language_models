@@ -126,7 +126,7 @@ def write_counter_b(outfilename,counter):
     of.close()
 
 if __name__=='__main__':
-    script, folder, outfilename = argv
-    counts = process_folder(folder,5,".txt")
+    script, folder, outfilename,dicts = argv
+    counts = process_folder(folder,5,"",dicts)
     write_counter_b(outfilename,counts)
 
