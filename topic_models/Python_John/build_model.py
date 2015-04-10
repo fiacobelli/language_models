@@ -133,6 +133,6 @@ def write_counter_b(outfilename,counter):
 
 if __name__=='__main__':
     script, folder, outfilename = argv
-    counts = process_folder(folder,5,100,outfilename,"")
+    counts = process_folder(folder,5,outfilename,100,"")
     write_counter_b(outfilename,counts)
 
