@@ -102,7 +102,7 @@ def locate(pattern, root_path):
             yield os.path.join(path, filename)
 
 
-def process_folder(folder,window_size,extension="txt",tempfname,f2d):
+def process_folder(folder,window_size,tempfname,f2d,extension="txt"):
     # Recursively find all *.txt files in **/usr/bin**.
     # f2d indicates how many files per dictionary (to process large collections)
     found_files = [f for f in locate("*"+extension,folder)]
@@ -133,6 +133,6 @@ def write_counter_b(outfilename,counter):
 
 if __name__=='__main__':
     script, folder, outfilename = argv
-    counts = process_folder(folder,5,"",100,outfilename)
+    counts = process_folder(folder,5,100,outfilename,"")
     write_counter_b(outfilename,counts)
 
