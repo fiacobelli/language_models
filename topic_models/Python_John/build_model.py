@@ -115,7 +115,7 @@ def process_folder(folder,window_size,tempfname,f2d,extension="txt"):
             pprint(str(datetime.datetime.now())+":"+str(i)+"/"+str(tot_files)+" Files")
         if i%f2d==0 and i>0:
             pprint(str(datetime.datetime.now())+": Writing files "+str(i-f2d)+" to "+str(i))
-            write_counter_b(tempfname+"_"+str(i)+".dat")
+            write_counter_b(tempfname+"_"+str(i)+".dat",total_counter)
             total_counter = collections.Counter()
     print "Done",tot_files,"Files",total_counter["@#total#@"],"Words",len(total_counter.keys())-total_counter["@#total#@"]-1,"pairs"
     return total_counter
