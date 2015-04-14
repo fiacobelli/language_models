@@ -47,11 +47,11 @@ def read_model(filename):
     '''
         read the filename model and return a dictionary
     '''
-    f = open(filename)
-    counts = {}
-    for line in f:
-        key,val = line.split("\t")
-        counts[key]=int(val)
+    counts={}
+    with open(filename) as f:
+        for line in f:
+            key,val = line.split("\t")
+            counts[key]=int(val)
     return counts
 
 def read_model_p(fname):

@@ -126,6 +126,7 @@ def write_counter(outfilename,counter):
     testFile = open(outfilename, "w")
     #testFile.write(printHeader())
     wordListPrinter(counter, testFile)
+    testFile.close()
 
 def write_counter_b(outfilename,counter):
     of = open(outfilename,"w")
