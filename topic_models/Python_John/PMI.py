@@ -24,6 +24,7 @@ from sys import argv
 import re
 import build_model as bm
 import numpy
+import cPickle, datetime
 
 punct = re.compile(r'\W')
 #functions used by PMI application from line 24 - 64
@@ -53,6 +54,12 @@ def read_model(filename):
         counts[key]=int(val)
     return counts
 
+def read_model_p(fname):
+    f = open(fname,"rb")
+    c = cPickle.load(f)
+    f.close()
+    return c
+
 # According to Newman et al., PMI-score(sentence)=median{PMI(w_i,w_j), i,j in {1..window size}
 def sentence_pmi(sentence,counts):
         tot = counts["@#total#@"]
@@ -66,8 +73,26 @@ def sentence_pmi(sentence,counts):
         return numpy.median(numpy.array(tot_pmi))
 
 
+def topic_key_pmi(fname,counts):
+    with open(fname) as f:
+        tot_pmi=0.0
+        num_t=1
+        for topic in f:
+            tot_pmi += sentence_pmi(topic2sentence(topic),counts)
+            num_t+=1
+    return tot_pmi/num_t
+
+
+def topic2sentence(topic):
+    print topic
+    tn,prob,words = topic.split("\t")
+    return words
+
+
 if __name__=='__main__':
-    script, filename, sentence = argv
-    m = read_model(filename)
-    print(sentence_pmi(sentence,m))
+    script, model,t_file = argv
+    print datetime.datetime.now(),"Reading model file"
+    m = read_model(model)
+    print datetime.datetime.now(), "Evaluating Topics"
+    print(topic_key_pmi(t_file,model))
 
