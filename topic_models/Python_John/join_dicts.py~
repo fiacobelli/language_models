@@ -52,10 +52,10 @@ def merge_files(flist):
 
             
 def write_counter(outfilename,counter):
-    with  open(outfilename, "w",1024000) as testFile:
+    with  open(outfilename, "w") as testFile:
         for key,val in counter.items():
             if len(key)>0:
-                 testFile.write("%s\t%s\n" % (key, val))                 
+                 testFile.write("%s\t%s\n" % (key, val))
 
 
 def write_counter_b(outfilename,counter):
