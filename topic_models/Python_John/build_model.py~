@@ -22,7 +22,9 @@ import math
 from collections import Counter
 from sys import argv
 import re
-import os, fnmatch
+import cPickle
+import os, fnmatch,datetime
+from pprint import pprint
 
 punct = re.compile(r'\W')
 #functions used by PMI application from line 24 - 64
@@ -100,16 +102,22 @@ def locate(pattern, root_path):
             yield os.path.join(path, filename)
 
 
-def process_folder(folder,window_size,extension="txt"):
-    # Recursively find all *.txt files in **/usr/bin**
+def process_folder(folder,window_size,tempfname,f2d,extension="txt"):
+    # Recursively find all *.txt files in **/usr/bin**.
+    # f2d indicates how many files per dictionary (to process large collections)
     found_files = [f for f in locate("*"+extension,folder)]
     total_counter = process_file(found_files[0],window_size)
     tot_files = len(found_files)
     print "Found",tot_files,"Files"
     for i,f in enumerate(found_files[1:]):
         total_counter.update(process_file(f,window_size))
-        if tot_files%(i+1) == 0:
-            print i,"/",tot_files,"Files"
+        if i%100 == 0:
+            pprint(str(datetime.datetime.now())+":"+str(i)+"/"+str(tot_files)+" Files")
+        if i%f2d==0 and i>0:
+            pprint(str(datetime.datetime.now())+": Writing files "+str(i-f2d)+" to "+str(i))
+            write_counter(tempfname+"_"+str(i)+".dat",total_counter)
+            del total_counter
+            total_counter = Counter()
     print "Done",tot_files,"Files",total_counter["@#total#@"],"Words",len(total_counter.keys())-total_counter["@#total#@"]-1,"pairs"
     return total_counter
 
@@ -118,10 +126,14 @@ def write_counter(outfilename,counter):
     testFile = open(outfilename, "w")
     #testFile.write(printHeader())
     wordListPrinter(counter, testFile)
-    
+
+def write_counter_b(outfilename,counter):
+    of = open(outfilename,"w")
+    cPickle.dump(counter,of,cPickle.HIGHEST_PROTOCOL)
+    of.close()
 
 if __name__=='__main__':
     script, folder, outfilename = argv
-    counts = process_folder(folder,5,"")
-    write_counter(outfilename,counts)
+    counts = process_folder(folder,5,outfilename,1500,"")
+    write_counter_b(outfilename,counts)
 
