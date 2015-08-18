@@ -20,11 +20,12 @@ Writing a PMI to pass through text files
 
 import math
 from collections import Counter
-from sys import argv
+import sys
 import re
 import build_model as bm
 import numpy
 import cPickle, datetime
+import pprint
 
 punct = re.compile(r'\W')
 #functions used by PMI application from line 24 - 64
@@ -32,8 +33,8 @@ punct = re.compile(r'\W')
 def pmi(w1, w2, grams, tot):
     key = w1 + " " + w2
     if key in grams:
-        return math.log((grams[w1 + " " + w2] * 1.0) / (grams[w1] * grams[w2]) * tot)
-    return 0
+        return math.log(float(grams[w1 + " " + w2])) / float(grams[w1] * grams[w2]) * tot)
+    return 0.5/tot
 
 
 def ngrams(input, n):
@@ -49,9 +50,13 @@ def read_model(filename):
     '''
     counts={}
     with open(filename) as f:
+        i=0
         for line in f:
             key,val = line.split("\t")
             counts[key]=int(val)
+            if i%10000==0:
+                sys.stdout.write('[%s] %s ...%s\r' % (str(datetime.datetime.now()),"Pairs Read:",str(i)))
+            i+=1
     return counts
 
 def read_model_p(fname):
@@ -63,36 +68,46 @@ def read_model_p(fname):
 # According to Newman et al., PMI-score(sentence)=median{PMI(w_i,w_j), i,j in {1..window size}
 def sentence_pmi(sentence,counts):
         tot = counts["@#total#@"]
-        words = bm.normalize_words(sentence.split(" "))
+        words = bm.normalize_words(sentence.strip().split(" "))
         tot_pmi = []
         combos = bm.bigramCombination(words)
         for b in combos:
             w1,w2=b.split()
             tot_pmi.append(pmi(w1,w2,counts,tot))
-        print tot_pmi
-        return numpy.median(numpy.array(tot_pmi))
+        tpmi= numpy.median(numpy.array(tot_pmi))
+        #print "PMI for topic:",tpmi
+        return tpmi
 
 
 def topic_key_pmi(fname,counts):
     with open(fname) as f:
         tot_pmi=0.0
         num_t=1
-        for topic in f:
-            tot_pmi += sentence_pmi(topic2sentence(topic),counts)
-            num_t+=1
+        try:
+            for topic in f:
+                if len(topic)>10:
+                    tot_pmi += sentence_pmi(topic2sentence(topic),counts)
+                    num_t+=1
+        except:
+            print "File",fname,"Failed on topic",num_t
     return tot_pmi/num_t
 
 
 def topic2sentence(topic):
-    print topic
+    #print topic
     tn,prob,words = topic.split("\t")
     return words
 
-
-if __name__=='__main__':
-    script, model,t_file = argv
+def pmi_many_files(modelfile, filelist):
     print datetime.datetime.now(),"Reading model file"
     m = read_model(model)
     print datetime.datetime.now(), "Evaluating Topics"
-    print(topic_key_pmi(t_file,model))
+    tfl=[(f,topic_key_pmi(f,m)) for f in filelist]
+    pprint.pprint(tfl) 
+
+if __name__=='__main__':
+    model = sys.argv[1] #pass the model file
+    files = sys.argv[2:] #then a bunch of files.
+    print "Files",files
+    pmi_many_files(model,files)
 
