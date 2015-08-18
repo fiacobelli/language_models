@@ -90,7 +90,6 @@ def topic2sentence(topic):
 
 
 if __name__=='__main__':
-    print "usage: python PMI.py <model> <list of topic key files>"
     script, model,t_file = argv
     print datetime.datetime.now(),"Reading model file"
     m = read_model(model)
