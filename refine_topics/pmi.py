@@ -1,4 +1,5 @@
 import os
+import math
 
 
 def __calculate_average_pmi__(dir_file, ngrams):
@@ -7,20 +8,30 @@ def __calculate_average_pmi__(dir_file, ngrams):
     files_in_dir = os.listdir(dir_file)
     for f in files_in_dir:
         if f.endswith('.txt'):
+            print f
             file_pmi = []
             num_topics = int(f.split('_')[2])
+            corpora_type = f.split('_')[0]
+            lines = 0
             with open (dir_file + f) as file:
                 for l in file:
                     words = [w.rstrip(',') for w in l.strip('\n').split(' ')[1:]]
                     file_pmi.append(calculate_topic_pmi(words, ngrams))
-                if num_topics in average_pmi:
-                    average_pmi[num_topics] += sum(file_pmi)/int(num_topics)
-                    num_file[num_topics] += 1.0
+                    lines += 1
+                if corpora_type in average_pmi:
+                    if num_topics in average_pmi[corpora_type]:
+                        average_pmi[corpora_type][num_topics] += sum(file_pmi)/lines
+                        num_file[corpora_type][num_topics] += 1.0
+                    else:
+                        average_pmi[corpora_type][num_topics] = sum(file_pmi)/lines
+                        num_file[corpora_type][num_topics] = 1.0
                 else:
-                    average_pmi[num_topics] = sum(file_pmi)/int(num_topics)
-                    num_file[num_topics] = 2.0
-    for key in average_pmi:
-        average_pmi[key] = average_pmi[key]/num_file[key]
+                    average_pmi[corpora_type] = {num_topics: sum(file_pmi)/lines}
+                    num_file[corpora_type] = {num_topics: 1.0}
+
+    for corp in average_pmi:
+        for key in average_pmi[corp]:
+            average_pmi[corp][key] = average_pmi[corp][key]/num_file[corp][key]
     return average_pmi
 
 
@@ -29,12 +40,9 @@ def calculate_topic_pmi(words, ngrams):
     for i, w1 in enumerate(words):
         for j, w2 in enumerate(words[i+1:]):
             if w1 in ngrams and w2 in ngrams and w1 + ' ' + w2 in ngrams:
-                pmi_topic.append(ngrams[w1 + ' ' + w2]/float(ngrams[w1] * ngrams[w2]))
-                print w1 + ' ' + w2
+                pmi_topic.append(math.log((ngrams[w1 + ' ' + w2] * ngrams["@count@"])/float(ngrams[w1] * ngrams[w2])))
             else:
                 pmi_topic.append(0)
-    print words
-    print sum(pmi_topic)/sum([i for i in range(len(words))])
     return sum(pmi_topic)/sum([i for i in range(len(words))])
 
 

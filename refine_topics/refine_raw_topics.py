@@ -1,6 +1,6 @@
 import math
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 
 def __save_topic__(dir_name, topics_prob_matrix, perc):
@@ -12,7 +12,7 @@ def __save_topic__(dir_name, topics_prob_matrix, perc):
         words = [x for (y, x) in sorted(zip(topic_row, topics_prob_matrix[0]), reverse=True)]
         word_prob = sorted(topic_row, reverse=True)
         stop_index = word_prob.index(0)
-        f.write(str(i) + ' ' + (', '.join(words[:15]))+'\n')
+        f.write(str(i) + ' ' + (', '.join(words[:stop_index]))+'\n')
     f.close()
 
 
@@ -55,7 +55,7 @@ def remove_garbage_topics(topics_prob, garbage_topics):
     return topics_prob
 
 
-def __graph_topic_against_uniform_prob__(topics_prob_matrix, topic_index):
+'''def __graph_topic_against_uniform_prob__(topics_prob_matrix, topic_index):
     topics_prob_matrix = zip(*topics_prob_matrix)
     for i, topic_row in enumerate(topics_prob_matrix[1:]):
         if i == topic_index:
@@ -67,7 +67,7 @@ def __graph_topic_against_uniform_prob__(topics_prob_matrix, topic_index):
             plt.show()
             break
 
-
+'''
 def load_prob_matrix(dir_name):
     topics_prob_matrix = []
     with open(dir_name) as f:
