@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
     files_in_dir = os.listdir(values.input_raw)
     ngrams = ng.__read_ngrams__(values.input_wiki)
-    print ("Finished readinging ngrams..")
+    print ("Finished reading ngrams..")
     for f in files_in_dir:
         if f.endswith('.txt'):
             f_parts = f.split('_')

@@ -1,6 +1,6 @@
 import os
 import math
-
+import numpy
 
 def __calculate_average_pmi__(dir_file, ngrams):
     average_pmi = {}
@@ -10,7 +10,8 @@ def __calculate_average_pmi__(dir_file, ngrams):
         if f.endswith('.txt'):
             print f
             file_pmi = []
-            num_topics = int(f.split('_')[2])
+            num_topics = f.split('_')[2]
+            indiv_file_pmi = f.split('_')[2] + "_" + f.split('_')[3]
             corpora_type = f.split('_')[0]
             lines = 0
             with open (dir_file + f) as file:
@@ -29,6 +30,9 @@ def __calculate_average_pmi__(dir_file, ngrams):
                     average_pmi[corpora_type] = {num_topics: sum(file_pmi)/lines}
                     num_file[corpora_type] = {num_topics: 1.0}
 
+                average_pmi[corpora_type][indiv_file_pmi] = sum(file_pmi)/lines
+                num_file[corpora_type][indiv_file_pmi] = 1
+
     for corp in average_pmi:
         for key in average_pmi[corp]:
             average_pmi[corp][key] = average_pmi[corp][key]/num_file[corp][key]
@@ -40,9 +44,9 @@ def calculate_topic_pmi(words, ngrams):
     for i, w1 in enumerate(words):
         for j, w2 in enumerate(words[i+1:]):
             if w1 in ngrams and w2 in ngrams and w1 + ' ' + w2 in ngrams:
-                pmi_topic.append(math.log((ngrams[w1 + ' ' + w2] * ngrams["@count@"])/float(ngrams[w1] * ngrams[w2])))
+                pmi_topic.append(math.log((ngrams[w1 + ' ' + w2] * ngrams["@#total#@"])/float(ngrams[w1] * ngrams[w2])))
             else:
                 pmi_topic.append(0)
-    return sum(pmi_topic)/sum([i for i in range(len(words))])
+    return numpy.median(pmi_topic)
 
 
