@@ -5,7 +5,7 @@ def __save_topic__(dir_name, topics_prob_matrix):
         words = [x for (y, x) in sorted(zip(topic_row, topics_prob_matrix[0]), reverse=True)]
         word_prob = sorted(topic_row, reverse=True)
         stop_index = word_prob.index(0)
-        f.write(str(i) + ' ' + (', '.join(words[:stop_index]))+'\n')
+        f.write(str(i) + ' ' + (', '.join(words[:10]))+'\n')
     f.close()
 
 
