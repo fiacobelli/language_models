@@ -15,18 +15,25 @@ def __save_topic__(dir_name, topics_prob_matrix, perc):
         f.write(str(i) + ' ' + (', '.join(words[:10]))+'\n')
     f.close()
 
-
+'''
+each topic is made up of words and words each topic word cell has a probability associated to it
+topic# word1 word2 word3
+This function will decide whether the topic should be trashed or not
+'''
 def find_garbage_topics(topics_prob_matrix, perc):
     kb_divergence = []
     for topics_row in topics_prob_matrix[1:]:
+        #each topic has a uniform probability which is the 1/sum of the probabilities making up x percentage of the topic
         uniform_prob = find_uniform_prob(topics_row, perc)
+        #find how muchthe original probabilities of the words in the topics diverge from its uniform divergence.
         kb_divergence.append(find_topic_kb_divergence(topics_row, uniform_prob))
     std = np.std(kb_divergence)
     mean = np.mean(kb_divergence)
     min_norm = mean - std
+    max_norm = mean + std
     garbage_topics =[]
     for i, d in enumerate(kb_divergence):
-        if d < min_norm:
+        if min_norm <= d <= max_norm:
             garbage_topics.append(i)
     return garbage_topics
 
