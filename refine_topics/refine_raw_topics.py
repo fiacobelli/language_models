@@ -33,7 +33,7 @@ def find_garbage_topics(topics_prob_matrix, perc):
     max_norm = mean + std
     garbage_topics =[]
     for i, d in enumerate(kb_divergence):
-        if min_norm <= d <= max_norm:
+        if d < max_norm:
             garbage_topics.append(i)
     return garbage_topics
 
