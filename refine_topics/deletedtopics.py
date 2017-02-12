@@ -41,4 +41,3 @@ def getDiff(raw_dir, refined_dir, del_dir):
 
 
 
-getDiff("/Users/amnairfan/language_models/research_analysis/data/topics_raw/", "/Users/amnairfan/language_models/research_analysis/data/topics_ref/", "/Users/amnairfan/language_models/research_analysis/data/topics_del/")
