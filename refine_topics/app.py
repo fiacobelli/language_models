@@ -1,6 +1,7 @@
 import topics_prob_matrix as tpm
 import extract_raw_topics as ert
 import refine_raw_topics as rrt
+import deletedtopics as dt
 import ngrams as ng
 import pmi
 import os
@@ -16,6 +17,7 @@ if __name__ == '__main__':
     args.add_argument('mallet_topics_dir', help='Folder that contains the files of words and their occurrences in topics (raw topics.')
     args.add_argument('raw_topics_dir', help='Folder where topics text files will be saved.')
     args.add_argument('refined_topics_dir', help='Folder where refined topics text files will be saved.')
+    args.add_argument('del_topics_dir', help='File to save average pmi of files refined with different number of topics.')
     args.add_argument('raw_pmi_file', help='File to save average pmi of files with raw topics and different number of topics.')
     args.add_argument('refined_pmi_file', help='File to save average pmi of files refined with different number of topics.')
     args.add_argument('perc', help='Total probability of words to be considered in finding the uniform topic.')
@@ -40,7 +42,7 @@ if __name__ == '__main__':
     pmi_dict = pmi.__calculate_average_pmi__(values.raw_topics_dir, ngrams)
     json.dump(pmi_dict, open(values.raw_pmi_file, 'w'))
     print ("Finished calculating pmi for raw topics..")
-
+    dt.getDiff(values.raw_topics_dir, values.refined_topics_dir, values.del_topics_dir)
 
 
 

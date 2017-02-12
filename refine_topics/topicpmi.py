@@ -1,8 +1,8 @@
 import os
 import math
 import numpy
-
-
+import ngrams as ng
+import deletedtopics as dt
 def __calculate_average_pmi__(dir_file, ngrams):
     average_pmi = {}
     num_file = {}
@@ -53,11 +53,22 @@ def __calculate_average_pmi__(dir_file, ngrams):
 def calculate_topic_pmi(words, ngrams):
     pmi_topic = []
     for i, w1 in enumerate(words):
-        for j, w2 in enumerate(words[i+1:]):
+        for j, w2 in enumerate(words[i + 1:]):
             if w1 in ngrams and w2 in ngrams and w1 + ' ' + w2 in ngrams:
-                pmi_topic.append(math.log((ngrams[w1 + ' ' + w2] * ngrams["@#total#@"])/float(ngrams[w1] * ngrams[w2])))
+                pmi_topic.append(
+                    math.log((ngrams[w1 + ' ' + w2] * ngrams["@#total#@"]) / float(ngrams[w1] * ngrams[w2])))
             else:
                 pmi_topic.append(0)
     return numpy.median(pmi_topic)
 
 
+
+#main
+ngrams = ng.__read_ngrams__("/Users/researchgroup/research/topic_model/data/wiki_ngram/wiki_modelmerge_1-17.dat")
+print ("Finished reading ngrams..")
+__calculate_average_pmi__("/Users/researchgroup/research/topic_model/data/raw_topics/", ngrams)
+print ("Finished calculating PMI for raw topics")
+__calculate_average_pmi__("/Users/researchgroup/research/topic_model/data/ref_topics/", ngrams)
+print ("Finished calculating PMI for refined topics")
+
+dt.getDiff("/Users/researchgroup/research/topic_model/data/raw_topics/","/Users/researchgroup/research/topic_model/data/ref_topics/","/Users/researchgroup/research/topic_model/data/del_topics/")

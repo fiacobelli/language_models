@@ -1,0 +1,9 @@
+0 computer, television, technology, news, internet, network, web, information, time, service: 0.0
+1 percent, year, market, prices, rate, billion, stock, bank, price, million: 0.0
+2 air, car, cars, travel, service, flight, airport, airlines, space, day: 0.0
+3 year, won, world, race, club, open, round, time, sports, lead: 0.0
+4 city, york, state, mr, county, mayor, jersey, board, public, officials: 0.0
+5 united, states, american, world, trade, china, international, japan, european, europe: 0.0
+6 school, children, students, university, year, education, schools, high, college, ms: 0.0
+7 article, san, los, angeles, national, page, correction, california, washington, john: 0.0
+8 mr, president, house, bush, campaign, clinton, republican, political, senate, party: 0.0
