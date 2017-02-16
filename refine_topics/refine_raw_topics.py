@@ -20,6 +20,7 @@ each topic is made up of words and words each topic word cell has a probability 
 topic# word1 word2 word3
 This function will decide whether the topic should be trashed or not
 '''
+
 def find_garbage_topics(topics_prob_matrix, perc):
     kb_divergence = []
     for topics_row in topics_prob_matrix[1:]:
@@ -27,6 +28,7 @@ def find_garbage_topics(topics_prob_matrix, perc):
         uniform_prob = find_uniform_prob(topics_row, perc)
         #find how muchthe original probabilities of the words in the topics diverge from its uniform divergence.
         kb_divergence.append(find_topic_kb_divergence(topics_row, uniform_prob))
+    #calculating the sd of kb diverege which is the difference betweeen each topic and its uniform distrubution.
     std = np.std(kb_divergence)
     mean = np.mean(kb_divergence)
     min_norm = mean - std

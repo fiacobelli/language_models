@@ -33,7 +33,6 @@ def diff(raw, refined):
 
 def getDiff(raw_dir, refined_dir, del_dir):
 	for f in os.listdir(raw_dir):
-		print f
 		if f.endswith('.txt'):
 			t = diff(read(raw_dir + f), read(refined_dir + f))
 			nf = open(del_dir + f, "w")
