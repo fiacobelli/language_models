@@ -10,12 +10,20 @@ import json
 #once saved, send both raw and refined pmi and save their difference to a directory
 
  #then for each file get average pmi
+'''
+raw_dir = "/Users/amnairfan/raw_topics/"
+ref_dir = "/Users/amnairfan/ref_topics/"
+del_dir = "/Users/amnairfan/del_topics/"
+pmi_dir = "/Users/amnairfan/pmi_results/refined_pmi_0215.csv"
+''''
 
-raw_dir = "/Users/researchgroup/research/topic_model/data/raw_topics"
-ref_dir = "/Users/researchgroup/research/topic_model/data/ref_topics"
+raw_dir = "/Users/researchgroup/research/topic_model/data/raw_topics/"
+ref_dir = "/Users/researchgroup/research/topic_model/data/ref_topics2/"
 del_dir = "/Users/researchgroup/research/topic_model/data/del_topics2/"
-pmi_dir = "/Users/researchgroup/research/topic_model/data/results_pmi/refined_pmi_0215.csv"
+pmi_dir = "/Users/researchgroup/research/topic_model/data/results_pmi/refined_pmi_021501.csv"
 
+
+num_file = {}
 pmidict = {}
 files_in_dir = os.listdir(raw_dir)
 for f in files_in_dir:
@@ -47,12 +55,32 @@ for f in files_in_dir:
         nf.close()
         parts = f.split("_")
         print parts
-        name = parts[0]
-        other = parts[2] + "_" + parts[3].split(".")[0]+ "_" + str(len(refined_pmi))
-        if name in  pmidict:
-            pmidict[name][other] = sum(refined_pmi)/len(refined_pmi)
+        name = parts[0] #senate
+        indiv_file_pmi = parts[2] + "_" + parts[3].split(".")[0]+ "_" + str(len(refined_pmi)) #200_30_29
+        #{senate:{200_30_29:}, {200: }}
+        num_topics = parts[2]
+        file_pmi = sum(refined_pmi)/len(refined_pmi)
+        if name in pmidict:
+            if num_topics in pmidict[name]:
+                pmidict[name][num_topics] += file_pmi
+                num_file[name][num_topics] += 1.0
+            else:
+                pmidict[name][num_topics] = file_pmi
+                num_file[name][num_topics] = 1.0
         else:
-             pmidict[name] = {other: sum(refined_pmi)/len(refined_pmi)}
+            pmidict[name] = {num_topics: file_pmi}
+            num_file[name] = {num_topics: 1.0}
+
+        pmidict[name][indiv_file_pmi] = file_pmi
+        num_file[name][indiv_file_pmi] = 1
+
+
+
+
+
+for corp in pmidict:
+    for key in pmidict[corp]:
+        pmidict[corp][key] = pmidict[corp][key] / num_file[corp][key]
 
 
 

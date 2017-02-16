@@ -4,7 +4,7 @@ from pprint import pprint
 from scipy.stats import ttest_ind
 import numpy as np
 
-type = "raw"
+type = "refined"
 
 def createArray(row, col):
 	return [[None for i in range(col)] for j in range(row)]
