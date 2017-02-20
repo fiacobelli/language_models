@@ -1,0 +1,135 @@
+There was a significant difference between the PMI values of the Senate_30 corpora (M=20.1, SD=1.7) and the Essays_30 corpora (M=2.11273005261, SD=0.118298605691); t (18)=31.665664636, p = 3.08364365989e-17
+
+
+There was a significant difference between the PMI values of the Senate_30 corpora (M=20.1, SD=1.7) and the NyTimes_30 corpora (M=23.7, SD=0.781024967591); t (18)=-5.77284282531, p = 1.8005285712e-05
+
+
+There was a significant difference between the PMI values of the Essays_30 corpora (M=2.11273005261, SD=0.118298605691) and the NyTimes_30 corpora (M=23.7, SD=0.781024967591); t (18)=-81.9839002478, p = 1.28434691617e-24
+
+
+There was a significant difference between the PMI values of the Senate_50 corpora (M=32.0, SD=1.41421356237) and the Essays_50 corpora (M=2.16479672781, SD=0.0654298618948); t (18)=63.222395002, p = 1.35945937492e-22
+
+
+There was a significant difference between the PMI values of the Senate_50 corpora (M=32.0, SD=1.41421356237) and the NyTimes_50 corpora (M=38.6, SD=1.56204993518); t (18)=-9.39666415795, p = 2.30666685142e-08
+
+
+There was a significant difference between the PMI values of the Essays_50 corpora (M=2.16479672781, SD=0.0654298618948) and the NyTimes_50 corpora (M=38.6, SD=1.56204993518); t (18)=-69.9144393939, p = 2.23807660593e-23
+
+
+There was a significant difference between the PMI values of the Senate_100 corpora (M=66.0, SD=1.54919333848) and the Essays_100 corpora (M=2.20883093442, SD=0.0389441344233); t (18)=123.492054359, p = 8.16291251174e-28
+
+
+There was a significant difference between the PMI values of the Senate_100 corpora (M=66.0, SD=1.54919333848) and the NyTimes_100 corpora (M=78.1, SD=2.84429253067); t (18)=-11.2077615079, p = 1.50305483599e-09
+
+
+There was a significant difference between the PMI values of the Essays_100 corpora (M=2.20883093442, SD=0.0389441344233) and the NyTimes_100 corpora (M=78.1, SD=2.84429253067); t (18)=-80.0382402932, p = 1.97675626053e-24
+
+
+There was a significant difference between the PMI values of the Senate_200 corpora (M=131.7, SD=3.1) and the Essays_200 corpora (M=2.21275310685, SD=0.0589339483785); t (18)=125.287600486, p = 6.29689346679e-28
+
+
+There was a significant difference between the PMI values of the Senate_200 corpora (M=131.7, SD=3.1) and the NyTimes_200 corpora (M=155.7, SD=2.05182845287); t (18)=-19.3677189764, p = 1.67593264514e-13
+
+
+There was a significant difference between the PMI values of the Essays_200 corpora (M=2.21275310685, SD=0.0589339483785) and the NyTimes_200 corpora (M=155.7, SD=2.05182845287); t (18)=-224.322807876, p = 1.77287367997e-32
+
+
+There was a significant difference between the PMI values of the Senate_400 corpora (M=271.5, SD=3.23264597505) and the Essays_400 corpora (M=2.12215879792, SD=0.0254650809708); t (18)=249.983591404, p = 2.52494038754e-33
+
+
+There was a significant difference between the PMI values of the Senate_400 corpora (M=271.5, SD=3.23264597505) and the NyTimes_400 corpora (M=299.1, SD=3.83275357935); t (18)=-16.5138258412, p = 2.55324445084e-12
+
+
+There was a significant difference between the PMI values of the Essays_400 corpora (M=2.12215879792, SD=0.0254650809708) and the NyTimes_400 corpora (M=299.1, SD=3.83275357935); t (18)=-232.447466627, p = 9.34639350404e-33
+
+
+There was a significant difference between the PMI values of the Senate_30 corpora (M=20.1, SD=1.7) and the Essays_30 corpora (M=2.11273005261, SD=0.118298605691); t (18)=31.665664636, p = 3.08364365989e-17
+
+
+There was a significant difference between the PMI values of the Senate_30 corpora (M=20.1, SD=1.7) and the NyTimes_30 corpora (M=23.7, SD=0.781024967591); t (18)=-5.77284282531, p = 1.8005285712e-05
+
+
+There was a significant difference between the PMI values of the Essays_30 corpora (M=2.11273005261, SD=0.118298605691) and the NyTimes_30 corpora (M=23.7, SD=0.781024967591); t (18)=-81.9839002478, p = 1.28434691617e-24
+
+
+There was a significant difference between the PMI values of the Senate_50 corpora (M=32.0, SD=1.41421356237) and the Essays_50 corpora (M=2.16479672781, SD=0.0654298618948); t (18)=63.222395002, p = 1.35945937492e-22
+
+
+There was a significant difference between the PMI values of the Senate_50 corpora (M=32.0, SD=1.41421356237) and the NyTimes_50 corpora (M=38.6, SD=1.56204993518); t (18)=-9.39666415795, p = 2.30666685142e-08
+
+
+There was a significant difference between the PMI values of the Essays_50 corpora (M=2.16479672781, SD=0.0654298618948) and the NyTimes_50 corpora (M=38.6, SD=1.56204993518); t (18)=-69.9144393939, p = 2.23807660593e-23
+
+
+There was a significant difference between the PMI values of the Senate_100 corpora (M=66.0, SD=1.54919333848) and the Essays_100 corpora (M=2.20883093442, SD=0.0389441344233); t (18)=123.492054359, p = 8.16291251174e-28
+
+
+There was a significant difference between the PMI values of the Senate_100 corpora (M=66.0, SD=1.54919333848) and the NyTimes_100 corpora (M=78.1, SD=2.84429253067); t (18)=-11.2077615079, p = 1.50305483599e-09
+
+
+There was a significant difference between the PMI values of the Essays_100 corpora (M=2.20883093442, SD=0.0389441344233) and the NyTimes_100 corpora (M=78.1, SD=2.84429253067); t (18)=-80.0382402932, p = 1.97675626053e-24
+
+
+There was a significant difference between the PMI values of the Senate_200 corpora (M=131.7, SD=3.1) and the Essays_200 corpora (M=2.21275310685, SD=0.0589339483785); t (18)=125.287600486, p = 6.29689346679e-28
+
+
+There was a significant difference between the PMI values of the Senate_200 corpora (M=131.7, SD=3.1) and the NyTimes_200 corpora (M=155.7, SD=2.05182845287); t (18)=-19.3677189764, p = 1.67593264514e-13
+
+
+There was a significant difference between the PMI values of the Essays_200 corpora (M=2.21275310685, SD=0.0589339483785) and the NyTimes_200 corpora (M=155.7, SD=2.05182845287); t (18)=-224.322807876, p = 1.77287367997e-32
+
+
+There was a significant difference between the PMI values of the Senate_400 corpora (M=271.5, SD=3.23264597505) and the Essays_400 corpora (M=2.12215879792, SD=0.0254650809708); t (18)=249.983591404, p = 2.52494038754e-33
+
+
+There was a significant difference between the PMI values of the Senate_400 corpora (M=271.5, SD=3.23264597505) and the NyTimes_400 corpora (M=299.1, SD=3.83275357935); t (18)=-16.5138258412, p = 2.55324445084e-12
+
+
+There was a significant difference between the PMI values of the Essays_400 corpora (M=2.12215879792, SD=0.0254650809708) and the NyTimes_400 corpora (M=299.1, SD=3.83275357935); t (18)=-232.447466627, p = 9.34639350404e-33
+
+
+There was a significant difference between the PMI values of the Senate_30 corpora (M=20.1, SD=1.7) and the Essays_30 corpora (M=2.11273005261, SD=0.118298605691); t (18)=31.665664636, p = 3.08364365989e-17
+
+
+There was a significant difference between the PMI values of the Senate_30 corpora (M=20.1, SD=1.7) and the NyTimes_30 corpora (M=23.7, SD=0.781024967591); t (18)=-5.77284282531, p = 1.8005285712e-05
+
+
+There was a significant difference between the PMI values of the Essays_30 corpora (M=2.11273005261, SD=0.118298605691) and the NyTimes_30 corpora (M=23.7, SD=0.781024967591); t (18)=-81.9839002478, p = 1.28434691617e-24
+
+
+There was a significant difference between the PMI values of the Senate_50 corpora (M=32.0, SD=1.41421356237) and the Essays_50 corpora (M=2.16479672781, SD=0.0654298618948); t (18)=63.222395002, p = 1.35945937492e-22
+
+
+There was a significant difference between the PMI values of the Senate_50 corpora (M=32.0, SD=1.41421356237) and the NyTimes_50 corpora (M=38.6, SD=1.56204993518); t (18)=-9.39666415795, p = 2.30666685142e-08
+
+
+There was a significant difference between the PMI values of the Essays_50 corpora (M=2.16479672781, SD=0.0654298618948) and the NyTimes_50 corpora (M=38.6, SD=1.56204993518); t (18)=-69.9144393939, p = 2.23807660593e-23
+
+
+There was a significant difference between the PMI values of the Senate_100 corpora (M=66.0, SD=1.54919333848) and the Essays_100 corpora (M=2.20883093442, SD=0.0389441344233); t (18)=123.492054359, p = 8.16291251174e-28
+
+
+There was a significant difference between the PMI values of the Senate_100 corpora (M=66.0, SD=1.54919333848) and the NyTimes_100 corpora (M=78.1, SD=2.84429253067); t (18)=-11.2077615079, p = 1.50305483599e-09
+
+
+There was a significant difference between the PMI values of the Essays_100 corpora (M=2.20883093442, SD=0.0389441344233) and the NyTimes_100 corpora (M=78.1, SD=2.84429253067); t (18)=-80.0382402932, p = 1.97675626053e-24
+
+
+There was a significant difference between the PMI values of the Senate_200 corpora (M=131.7, SD=3.1) and the Essays_200 corpora (M=2.21275310685, SD=0.0589339483785); t (18)=125.287600486, p = 6.29689346679e-28
+
+
+There was a significant difference between the PMI values of the Senate_200 corpora (M=131.7, SD=3.1) and the NyTimes_200 corpora (M=155.7, SD=2.05182845287); t (18)=-19.3677189764, p = 1.67593264514e-13
+
+
+There was a significant difference between the PMI values of the Essays_200 corpora (M=2.21275310685, SD=0.0589339483785) and the NyTimes_200 corpora (M=155.7, SD=2.05182845287); t (18)=-224.322807876, p = 1.77287367997e-32
+
+
+There was a significant difference between the PMI values of the Senate_400 corpora (M=271.5, SD=3.23264597505) and the Essays_400 corpora (M=2.12215879792, SD=0.0254650809708); t (18)=249.983591404, p = 2.52494038754e-33
+
+
+There was a significant difference between the PMI values of the Senate_400 corpora (M=271.5, SD=3.23264597505) and the NyTimes_400 corpora (M=299.1, SD=3.83275357935); t (18)=-16.5138258412, p = 2.55324445084e-12
+
+
+There was a significant difference between the PMI values of the Essays_400 corpora (M=2.12215879792, SD=0.0254650809708) and the NyTimes_400 corpora (M=299.1, SD=3.83275357935); t (18)=-232.447466627, p = 9.34639350404e-33
+
+

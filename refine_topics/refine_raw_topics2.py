@@ -18,9 +18,9 @@ pmi_dir = "/Users/amnairfan/pmi_results/refined_pmi_0215.csv"
 ''''
 
 raw_dir = "/Users/researchgroup/research/topic_model/data/raw_topics/"
-ref_dir = "/Users/researchgroup/research/topic_model/data/ref_topics2/"
-del_dir = "/Users/researchgroup/research/topic_model/data/del_topics2/"
-pmi_dir = "/Users/researchgroup/research/topic_model/data/results_pmi/refined_pmi_021501.csv"
+ref_dir = "/Users/researchgroup/research/topic_model/data/ref_topics_uniform2/"
+del_dir = "/Users/researchgroup/research/topic_model/data/del_topics_uniform2/"
+pmi_dir = "/Users/researchgroup/research/topic_model/data/results_pmi/refined_pmi_022017.csv"
 
 
 num_file = {}
@@ -46,7 +46,7 @@ for f in files_in_dir:
         with open(raw_dir + f) as file:
             for l in file:
                 p = float(l.split(":")[1])
-                if p >= min and p <=max:
+                if p >= max:
                     refined_pmi.append(p)
                     refined_topics += l
         print "refined pmi",refined_pmi

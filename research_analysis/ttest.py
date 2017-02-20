@@ -3,7 +3,7 @@ import numpy as np
 from scipy.stats import ttest_ind
 
 
-pmi_csv_path = "data/refined_pmi.csv"
+pmi_csv_path = "data/reports/refined_pmi.csv"
 report_path = "data/reports/refined_report.txt"
 
 
