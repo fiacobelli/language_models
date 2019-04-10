@@ -7,7 +7,7 @@ import re,os,argparse
 parser = argparse.ArgumentParser()
 
 parser.add_argument("dir",help="The root directory of all documents to process.")
-parser.add_argument("dest",help="The root directory of destination.")
+parser.add_argument("dest",help="The root directory of destination output file")
 
 ptags = re.compile(r'<p>(.+)?</p>')
 
